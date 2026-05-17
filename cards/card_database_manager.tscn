@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://csf7qdqgtmniq"]
+
+[ext_resource type="Script" uid="uid://dfskjrlx7x8ie" path="res://card_builder/card_database.gd" id="1_twdnv"]
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="2_g4ohx"]
+[ext_resource type="Resource" uid="uid://cak8j1qhajq3w" path="res://cards/card_parts/upper_card_resources/werewolf_upper.tres" id="3_67ou5"]
+[ext_resource type="Resource" uid="uid://bfwfuqbeyxuaa" path="res://cards/card_parts/upper_card_resources/banshee_upper.tres" id="4_egdmf"]
+[ext_resource type="Resource" uid="uid://dwofi7o4unt81" path="res://cards/card_parts/upper_card_resources/vampire_lord_upper.tres" id="5_7eleq"]
+[ext_resource type="Resource" uid="uid://b5owj4lddfojl" path="res://cards/card_parts/upper_card_resources/chaotic_imp_upper.tres" id="6_2rowf"]
+[ext_resource type="Resource" uid="uid://dhfm4a8evfx32" path="res://cards/card_parts/upper_card_resources/skeleton_upper.tres" id="7_lm5u5"]
+[ext_resource type="Script" uid="uid://biq8vwcnh7tot" path="res://cards/card_parts/lower_card_part.gd" id="7_rjtrm"]
+[ext_resource type="Resource" uid="uid://d1pswiasmonq2" path="res://cards/card_parts/lower_card_resources/werewolf_lower.tres" id="8_lm5u5"]
+[ext_resource type="Resource" uid="uid://bmm2x56oc8cit" path="res://cards/card_parts/lower_card_resources/banshee_lower.tres" id="9_ar4yc"]
+[ext_resource type="Resource" uid="uid://btnfcech45lka" path="res://cards/card_parts/lower_card_resources/vampire_lord_lower.tres" id="10_kav62"]
+[ext_resource type="Resource" uid="uid://bic3tjsvgmtvm" path="res://cards/card_parts/lower_card_resources/chaotic_imp_lower.tres" id="11_0gq83"]
+[ext_resource type="Resource" uid="uid://djl6ol324ydw2" path="res://cards/card_parts/lower_card_resources/skeleton_lower.tres" id="13_ar4yc"]
+
+[node name="CardDatabaseManager" type="Node" unique_id=414585039]
+script = ExtResource("1_twdnv")
+upper_card_parts = Array[ExtResource("2_g4ohx")]([ExtResource("3_67ou5"), ExtResource("4_egdmf"), ExtResource("5_7eleq"), ExtResource("6_2rowf"), ExtResource("7_lm5u5")])
+lower_card_parts = Array[ExtResource("7_rjtrm")]([ExtResource("8_lm5u5"), ExtResource("9_ar4yc"), ExtResource("10_kav62"), ExtResource("11_0gq83"), ExtResource("13_ar4yc")])

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bsvvr7pwgjjr4"]
+
+[ext_resource type="Script" uid="uid://dqw542pi061jj" path="res://cards/card_parts/cardbuilder_lower_part.gd" id="1_pq2jy"]
+[ext_resource type="Texture2D" uid="uid://dho2pawq0baia" path="res://cards/card_parts/card_images/lower_card_base.png" id="2_mjqa3"]
+
+[node name="LowerCardPartScene" type="Control" unique_id=1998358053]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pq2jy")
+
+[node name="SelectionButton" type="Button" parent="." unique_id=888475730]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 250.0
+
+[node name="LowerCardSprite" type="TextureRect" parent="." unique_id=383590605]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 28.0
+offset_top = 58.0
+offset_right = 220.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("2_mjqa3")
+
+[node name="CardNameLabel" type="Label" parent="." unique_id=2102168539]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 35.0
+offset_right = 68.0
+offset_bottom = 58.0
+text = " Lord"
+
+[node name="TypeLabel" type="Label" parent="." unique_id=2006363910]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 178.0
+offset_right = 220.0
+offset_bottom = 201.0
+text = "Humanoid"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="DefencePointsLabel" type="Label" parent="." unique_id=141011674]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 181.0
+offset_top = 35.0
+offset_right = 221.0
+offset_bottom = 58.0
+text = "1200"
+horizontal_alignment = 2

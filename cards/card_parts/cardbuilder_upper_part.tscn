@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://de1xoci5e3yrr"]
+
+[ext_resource type="Script" uid="uid://c8xefkv0mvagh" path="res://cards/card_parts/cardbuilder_upper_part.gd" id="1_wrquq"]
+[ext_resource type="Texture2D" uid="uid://b5wv600nibtc8" path="res://cards/card_parts/card_images/upper_card_base.png" id="2_0lv6w"]
+
+[node name="UpperCardPartScene" type="Control" unique_id=321929642]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wrquq")
+
+[node name="SelectionButton" type="Button" parent="." unique_id=1951174537]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 250.0
+
+[node name="UpperCardSprite" type="TextureRect" parent="." unique_id=1981010098]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = 58.0
+offset_right = 220.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_0lv6w")
+
+[node name="CardNameLabel" type="Label" parent="." unique_id=719384579]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 35.0
+offset_right = 94.0
+offset_bottom = 58.0
+text = "Vampire"
+
+[node name="AttackPointsLabel" type="Label" parent="." unique_id=965766545]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 183.0
+offset_top = 35.0
+offset_right = 220.0
+offset_bottom = 58.0
+text = "3000"
+horizontal_alignment = 2
+
+[node name="TypeLabel" type="Label" parent="." unique_id=3171801]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 31.0
+offset_top = 178.0
+offset_right = 221.0
+offset_bottom = 201.0
+text = "Vampire"
+horizontal_alignment = 2
+
+[node name="AttributeLabel" type="Label" parent="." unique_id=981311980]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 178.0
+offset_right = 102.0
+offset_bottom = 201.0
+text = "SULPHUR"

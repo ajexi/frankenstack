@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://cak8j1qhajq3w"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_6lkt5"]
+[ext_resource type="Texture2D" uid="uid://ch6vxjcxngus" path="res://cards/card_parts/card_images/werewolf_upper.png" id="2_hmmrw"]
+
+[resource]
+script = ExtResource("1_6lkt5")
+upper_part_name = "Were"
+attribute = "EARTH"
+upper_card_type = "Beast"
+attack_points = 2500
+upper_card_image = ExtResource("2_hmmrw")
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

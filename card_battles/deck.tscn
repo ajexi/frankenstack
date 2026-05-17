@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cv8nvvy8ugf8l"]
+
+[ext_resource type="Script" uid="uid://sfdrmogv52v7" path="res://card_battles/deck.gd" id="1_o7d4t"]
+[ext_resource type="Texture2D" uid="uid://3g1eyx5fr3re" path="res://cards/card_back.png" id="1_ytnnc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7d4t"]
+size = Vector2(192, 240)
+
+[node name="Deck" type="Node2D" unique_id=2116339862]
+script = ExtResource("1_o7d4t")
+
+[node name="DeckSprite" type="Sprite2D" parent="." unique_id=45043580]
+unique_name_in_owner = true
+z_index = -2
+texture = ExtResource("1_ytnnc")
+
+[node name="CollisionArea" type="Area2D" parent="." unique_id=2078648833]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" unique_id=1166802984]
+shape = SubResource("RectangleShape2D_o7d4t")
+
+[node name="DeckSizeLabel" type="RichTextLabel" parent="." unique_id=2130000069]
+unique_name_in_owner = true
+z_index = -2
+offset_left = -39.0
+offset_top = -40.0
+offset_right = 1.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

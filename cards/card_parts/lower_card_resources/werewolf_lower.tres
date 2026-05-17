@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LowerCardPart" format=3 uid="uid://d1pswiasmonq2"]
+
+[ext_resource type="Texture2D" uid="uid://333852a1c67r" path="res://cards/card_parts/card_images/werewolf_lower.png" id="1_r4vy3"]
+[ext_resource type="Script" uid="uid://biq8vwcnh7tot" path="res://cards/card_parts/lower_card_part.gd" id="2_evc6s"]
+
+[resource]
+script = ExtResource("2_evc6s")
+lower_card_name = "wolf"
+lower_card_type = "Humanoid"
+defence_points = 1600
+lower_card_image = ExtResource("1_r4vy3")
+metadata/_custom_type_script = "uid://biq8vwcnh7tot"

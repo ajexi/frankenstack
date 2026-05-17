@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://dhfm4a8evfx32"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_n41e6"]
+[ext_resource type="Texture2D" uid="uid://b5wv600nibtc8" path="res://cards/card_parts/card_images/upper_card_base.png" id="2_ql3lf"]
+
+[resource]
+script = ExtResource("1_n41e6")
+upper_part_name = "Skele"
+attribute = "METAL"
+upper_card_type = "Undead"
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

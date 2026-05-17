@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://dwofi7o4unt81"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_ae10h"]
+[ext_resource type="Texture2D" uid="uid://b5wv600nibtc8" path="res://cards/card_parts/card_images/upper_card_base.png" id="2_jo8k6"]
+
+[resource]
+script = ExtResource("1_ae10h")
+upper_part_name = "Vampire"
+attribute = "SULPHUR"
+upper_card_type = "Vampire"
+attack_points = 3000
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"
