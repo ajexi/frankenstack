@@ -1,5 +1,7 @@
 class_name EnemyCard extends CombinedCard
 
+@onready var enemy_card_collision: Area2D = %EnemyCardCollision
+
 func _ready() -> void:
 	_upper_card_sprite.texture = upper_card_part.upper_card_image
 	_lower_card_sprite.texture = lower_card_part.lower_card_image

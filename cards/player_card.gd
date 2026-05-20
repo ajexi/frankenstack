@@ -4,6 +4,7 @@ signal hovered
 signal hovered_off
 
 @onready var _collision_area: Area2D = %CollisionArea
+@onready var _collision_shape_2d: CollisionShape2D = %CollisionShape2D
 
 func _ready() -> void:
 	_upper_card_sprite.texture = upper_card_part.upper_card_image

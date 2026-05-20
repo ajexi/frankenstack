@@ -1,10 +1,21 @@
 class_name CombinedCard extends Node2D
 
-##Calculated based on the ATK/DEF points of the combined card.
+##Calculated based on the ATK/DEF points of the combined card using the
+##calculate_card_rank() function.
 var card_rank : int
 
 ##Used to determine the card's position in the card manager during battles.
 var hand_position
+
+##Determines the card slot that the card has been placed in. This is used for animations
+##etc. on the field.
+var card_slot_card_is_in : CardSlot
+
+##The position of the card. True if the card is in defence position, false if the card
+##is in attack position.
+var is_in_defence_position : bool = false
+
+var defeated : bool = false
 
 @export var upper_card_part : UpperCardPart
 @export var lower_card_part : LowerCardPart

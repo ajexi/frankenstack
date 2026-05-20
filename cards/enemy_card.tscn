@@ -306,6 +306,9 @@ _data = {
 &"card_flip": SubResource("Animation_hel13")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swhog"]
+size = Vector2(190, 240)
+
 [node name="EnemyCard" type="Node2D" unique_id=1363522026]
 script = ExtResource("1_swhog")
 card_supertype = "OPPONENT_CREATURE"
@@ -402,3 +405,11 @@ vertical_alignment = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1560867038]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_auvip")
+
+[node name="EnemyCardCollision" type="Area2D" parent="." unique_id=517097203]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCardCollision" unique_id=1422446953]
+shape = SubResource("RectangleShape2D_swhog")

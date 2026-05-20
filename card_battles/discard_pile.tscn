@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bh6bi4kinm30"]
+
+[ext_resource type="Texture2D" uid="uid://bis2fq7ddvaf1" path="res://card_battles/card_slot.png" id="1_lwff5"]
+[ext_resource type="Script" uid="uid://uem46ommhokg" path="res://card_battles/discard_pile.gd" id="1_q6r7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r7e"]
+size = Vector2(192, 238)
+
+[node name="DiscardPile" type="Node2D" unique_id=655734578]
+script = ExtResource("1_q6r7e")
+
+[node name="DiscardPileSprite" type="Sprite2D" parent="." unique_id=143184658]
+texture = ExtResource("1_lwff5")
+
+[node name="CollisionArea" type="Area2D" parent="." unique_id=68421237]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" unique_id=1112645469]
+shape = SubResource("RectangleShape2D_q6r7e")

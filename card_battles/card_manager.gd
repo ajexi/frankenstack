@@ -7,9 +7,11 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 var card_being_dragged: CombinedCard
 var screen_size: Vector2
 var is_hovering_on_card: bool
+var selected_creature : PlayerCard
 
 @onready var player_hand: Node2D = %PlayerHand
 @onready var input_manager: InputManager = %InputManager
+@onready var battle_manager: BattleManager = %BattleManager
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -40,8 +42,10 @@ func finish_drag() -> void:
 			#Card dropped into an empty card slot.\
 			is_hovering_on_card = false
 			card_being_dragged.position = card_slot_found.position
-			card_being_dragged.get_node("CollisionArea/CollisionShape2D").disabled = true
 			card_slot_found.card_in_slot = true
+			card_slot_found.collision_shape_2d.disabled = true
+			card_being_dragged.card_slot_card_is_in = card_slot_found
+			battle_manager.player_creatures_in_play.append(card_being_dragged)
 		else:
 			player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 	else:
@@ -57,20 +61,23 @@ func connect_card_signals(card: CombinedCard) -> void:
 
 
 func on_hovered_over_card(card: CombinedCard) -> void:
+	if card.card_slot_card_is_in:
+		return
 	if not is_hovering_on_card:
 		is_hovering_on_card = true
 		highlight_card(card, true)
 	
 
 func on_hovered_off_card(card: CombinedCard) -> void:
-	if not card_being_dragged:
-		highlight_card(card, false)
-		#Check if hovered off one card amd straight on to another one.
-		var new_card_hovered = raycast_check_for_card()
-		if new_card_hovered:
-			highlight_card(new_card_hovered, true)
-		else:
-			is_hovering_on_card = false
+	if not card.defeated:
+		if not card_being_dragged:
+			highlight_card(card, false)
+			#Check if hovered off one card amd straight on to another one.
+			var new_card_hovered = raycast_check_for_card()
+			if new_card_hovered:
+				highlight_card(new_card_hovered, true)
+			else:
+				is_hovering_on_card = false
 	
 	
 func highlight_card(card: CombinedCard, hovered: bool) -> void:
@@ -129,3 +136,39 @@ func on_left_click_released() -> void:
 	if card_being_dragged:
 		finish_drag()
 		
+
+func card_clicked(card : PlayerCard) -> void:
+	if card.card_slot_card_is_in:
+		if battle_manager.is_opponents_turn == false:
+			if battle_manager.player_is_attacking == false:
+				#card is on field
+				if card not in battle_manager.player_cards_attacked_this_turn:
+					if battle_manager.opponent_creatures_in_play.size() == 0:
+						battle_manager.direct_attack(card, "Player")
+						battle_manager.player_cards_attacked_this_turn.append(card)
+						return
+					else:
+						select_card_for_battle(card)
+	else:
+		#card in hand
+		start_drag(card)
+	
+
+func select_card_for_battle(card) -> void:
+	if selected_creature:
+		if selected_creature == card:
+			card.position.y += 20
+			selected_creature = null
+		else:
+			card.position.y += 20
+			selected_creature = card
+			card.position.y -= 20
+	else:
+		selected_creature = card
+		card.position.y -= 20
+		
+
+func unselect_selected_creature() -> void:
+	if selected_creature:
+		selected_creature.position.y  += 20
+		selected_creature = null

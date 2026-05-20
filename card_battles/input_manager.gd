@@ -2,12 +2,14 @@ class_name InputManager extends Node2D
 
 const CARD_COLLISION_MASK: int = 1
 const DECK_COLLISION_MASK: int = 4
+const COLLISION_MASK_OPPONENT_CARD : int = 16
 
 signal left_mouse_button_clicked
 signal left_mouse_button_released
 
 @onready var card_manager: CardManager = %CardManager
 @onready var player_deck: Node2D = %PlayerDeck
+@onready var battle_manager: BattleManager = %BattleManager
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -31,7 +33,9 @@ func raycast_at_cursor() -> void:
 			#Card clicked
 			var card_found = result[0].collider.get_parent()
 			if card_found:
-				card_manager.start_drag(card_found)
+				card_manager.card_clicked(card_found)
 		elif result_collision_mask == DECK_COLLISION_MASK:
 			#Deck clicked
 			player_deck.draw_card()
+		elif result_collision_mask == COLLISION_MASK_OPPONENT_CARD:
+			battle_manager.enemy_card_selected(result[0].collider.get_parent())
