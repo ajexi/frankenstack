@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d2re5apyn5eri"]
+
+[ext_resource type="Texture2D" uid="uid://3g1eyx5fr3re" path="res://cards/card_back.png" id="2_7x6qw"]
+
+[node name="OpponentDeck" type="Node2D" unique_id=2116339862]
+
+[node name="DeckSprite" type="Sprite2D" parent="." unique_id=45043580]
+unique_name_in_owner = true
+z_index = -2
+texture = ExtResource("2_7x6qw")
+
+[node name="DeckSizeLabel" type="RichTextLabel" parent="." unique_id=2130000069]
+unique_name_in_owner = true
+z_index = -2
+offset_left = -39.0
+offset_top = -40.0
+offset_right = 1.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

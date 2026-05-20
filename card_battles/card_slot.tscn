@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5uyb"]
 size = Vector2(192, 238)
 
-[node name="CardSlot" type="Node2D" unique_id=385052313]
+[node name="CreatureCardSlot" type="Node2D" unique_id=385052313]
 script = ExtResource("1_j5uyb")
+card_slot_type = "CREATURE"
 
 [node name="CardSlotSprite" type="Sprite2D" parent="." unique_id=1725481481]
 texture = ExtResource("1_oj7sd")

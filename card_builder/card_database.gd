@@ -7,3 +7,5 @@ const LOWER_CARD_RESOURCE_PATH : String = "res://cards/card_parts/lower_card_res
 @export var lower_card_parts : Array[LowerCardPart] = []
 
 var player_created_cards = []
+
+var test_opponent_deck = []

@@ -82,11 +82,39 @@ offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="CardBeingBuilt" unique_id=1827465483]
 layout_mode = 0
-offset_right = 960.0
-offset_bottom = 1080.0
-theme_override_constants/margin_left = 370
-theme_override_constants/margin_top = 420
+offset_right = 461.5
+offset_bottom = 540.5
+scale = Vector2(2, 2)
+theme_override_constants/margin_left = 135
+theme_override_constants/margin_top = 152
 
 [node name="CardbuilderCard" parent="CardBeingBuilt/MarginContainer" unique_id=996800883 instance=ExtResource("2_oasbu")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="BuildCardButton" type="Button" parent="." unique_id=979675208]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 400.0
+offset_top = 827.0
+offset_right = 532.0
+offset_bottom = 904.0
+theme_override_font_sizes/font_size = 50
+text = "Build"
+
+[node name="BattleButton" type="Button" parent="." unique_id=64425294]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 802.0
+offset_top = 1034.0
+offset_right = 905.0
+offset_bottom = 1065.0
+text = "Go To Battle"
+
+[node name="Build10CardsButton" type="Button" parent="." unique_id=1545949403]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 919.0
+offset_right = 500.0
+offset_bottom = 950.0
+text = "Build 10"

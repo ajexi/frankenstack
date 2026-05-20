@@ -7,4 +7,5 @@
 script = ExtResource("2_lv1hc")
 lower_card_name = "ton"
 lower_card_type = "Construct"
+defence_points = 200
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

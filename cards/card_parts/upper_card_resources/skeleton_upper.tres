@@ -8,4 +8,5 @@ script = ExtResource("1_n41e6")
 upper_part_name = "Skele"
 attribute = "METAL"
 upper_card_type = "Undead"
+attack_points = 300
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

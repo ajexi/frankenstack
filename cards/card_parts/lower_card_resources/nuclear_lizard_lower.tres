@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LowerCardPart" format=3 uid="uid://k328jwktu7kp"]
+
+[ext_resource type="Texture2D" uid="uid://dho2pawq0baia" path="res://cards/card_parts/card_images/lower_card_base.png" id="1_k0hgy"]
+[ext_resource type="Script" uid="uid://biq8vwcnh7tot" path="res://cards/card_parts/lower_card_part.gd" id="2_3aokv"]
+
+[resource]
+script = ExtResource("2_3aokv")
+lower_card_name = " Lizard"
+lower_card_type = "Reptile"
+defence_points = 1200
+metadata/_custom_type_script = "uid://biq8vwcnh7tot"

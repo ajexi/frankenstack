@@ -72,9 +72,8 @@ horizontal_alignment = 1
 [node name="CardNameLabel" type="Label" parent="CardLabels" unique_id=1686653399]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 39.0
 offset_top = -23.0
-offset_right = 154.0
+offset_right = 192.0
 horizontal_alignment = 1
 
 [node name="CardRankLabel" type="Label" parent="CardLabels" unique_id=603048053]

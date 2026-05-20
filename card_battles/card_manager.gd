@@ -15,6 +15,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	input_manager.left_mouse_button_released.connect(on_left_click_released)
 
+
 func _process(delta: float) -> void:
 	if card_being_dragged:
 		var mouse_position = get_global_mouse_position()
@@ -26,6 +27,7 @@ func _process(delta: float) -> void:
 
 func start_drag(card) -> void:
 	card_being_dragged = card
+	card_being_dragged.z_index = 2
 	card.scale = Vector2(1,1)
 	
 
@@ -33,21 +35,25 @@ func finish_drag() -> void:
 	card_being_dragged.scale = Vector2(1.05,1.05)
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
-		player_hand.remove_card_from_hand(card_being_dragged)
-		#Card dropped into an empty card slot.
-		card_being_dragged.position = card_slot_found.position
-		card_being_dragged.get_node("CollisionArea/CollisionShape2D").disabled = true
-		card_slot_found.card_in_slot = true
+		if card_being_dragged.card_supertype == card_slot_found.card_slot_type:
+			player_hand.remove_card_from_hand(card_being_dragged)
+			#Card dropped into an empty card slot.\
+			is_hovering_on_card = false
+			card_being_dragged.position = card_slot_found.position
+			card_being_dragged.get_node("CollisionArea/CollisionShape2D").disabled = true
+			card_slot_found.card_in_slot = true
+		else:
+			player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 	else:
 		player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
+	card_being_dragged.scale = Vector2(1,1)
+	card_being_dragged.z_index = 1
 	card_being_dragged = null
 	
-
 
 func connect_card_signals(card: CombinedCard) -> void:
 	card.hovered.connect(on_hovered_over_card)
 	card.hovered_off.connect(on_hovered_off_card)
-
 
 
 func on_hovered_over_card(card: CombinedCard) -> void:

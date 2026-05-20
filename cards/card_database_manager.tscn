@@ -8,13 +8,33 @@
 [ext_resource type="Resource" uid="uid://b5owj4lddfojl" path="res://cards/card_parts/upper_card_resources/chaotic_imp_upper.tres" id="6_2rowf"]
 [ext_resource type="Resource" uid="uid://dhfm4a8evfx32" path="res://cards/card_parts/upper_card_resources/skeleton_upper.tres" id="7_lm5u5"]
 [ext_resource type="Script" uid="uid://biq8vwcnh7tot" path="res://cards/card_parts/lower_card_part.gd" id="7_rjtrm"]
+[ext_resource type="Resource" uid="uid://brrjnksyajspq" path="res://cards/card_parts/upper_card_resources/frankenstein_upper.tres" id="8_kav62"]
 [ext_resource type="Resource" uid="uid://d1pswiasmonq2" path="res://cards/card_parts/lower_card_resources/werewolf_lower.tres" id="8_lm5u5"]
 [ext_resource type="Resource" uid="uid://bmm2x56oc8cit" path="res://cards/card_parts/lower_card_resources/banshee_lower.tres" id="9_ar4yc"]
+[ext_resource type="Resource" uid="uid://blffyajpkudmi" path="res://cards/card_parts/upper_card_resources/phoenix_upper.tres" id="9_iicqa"]
+[ext_resource type="Resource" uid="uid://cnmsgl7tyi3nf" path="res://cards/card_parts/upper_card_resources/nuclear_lizard_upper.tres" id="10_g2ecq"]
 [ext_resource type="Resource" uid="uid://btnfcech45lka" path="res://cards/card_parts/lower_card_resources/vampire_lord_lower.tres" id="10_kav62"]
 [ext_resource type="Resource" uid="uid://bic3tjsvgmtvm" path="res://cards/card_parts/lower_card_resources/chaotic_imp_lower.tres" id="11_0gq83"]
+[ext_resource type="Resource" uid="uid://3vrmyiqav1wt" path="res://cards/card_parts/upper_card_resources/atlas_moth_upper.tres" id="11_sjxvx"]
+[ext_resource type="Resource" uid="uid://dbcspbt6031s1" path="res://cards/card_parts/upper_card_resources/vile_lich_upper.tres" id="12_lrybk"]
 [ext_resource type="Resource" uid="uid://djl6ol324ydw2" path="res://cards/card_parts/lower_card_resources/skeleton_lower.tres" id="13_ar4yc"]
+[ext_resource type="Resource" uid="uid://cqjpkqdyfp0ua" path="res://cards/card_parts/upper_card_resources/man-eating_pitcher_plant_upper.tres" id="13_l3ubd"]
+[ext_resource type="Resource" uid="uid://bvkgorrl8kdu1" path="res://cards/card_parts/upper_card_resources/mermaid_upper.tres" id="14_o5b54"]
+[ext_resource type="Resource" uid="uid://dmx11n4akwfji" path="res://cards/card_parts/lower_card_resources/frankenstein_lower.tres" id="15_0gq83"]
+[ext_resource type="Resource" uid="uid://beri4lwuuaauc" path="res://cards/card_parts/upper_card_resources/exalted_angel_upper.tres" id="15_lrybk"]
+[ext_resource type="Resource" uid="uid://d314rb7mrwht3" path="res://cards/card_parts/upper_card_resources/giant_centipede_upper.tres" id="16_o5b54"]
+[ext_resource type="Resource" uid="uid://b60tw4n107rhm" path="res://cards/card_parts/upper_card_resources/valiant_knight_upper.tres" id="17_gltkn"]
+[ext_resource type="Resource" uid="uid://c0k0yfxpdt61p" path="res://cards/card_parts/lower_card_resources/phoenix_lower.tres" id="17_i0ikc"]
+[ext_resource type="Resource" uid="uid://k328jwktu7kp" path="res://cards/card_parts/lower_card_resources/nuclear_lizard_lower.tres" id="23_ig4rd"]
+[ext_resource type="Resource" uid="uid://c0eyrx07t2pti" path="res://cards/card_parts/lower_card_resources/atlas_moth_lower.tres" id="24_gltkn"]
+[ext_resource type="Resource" uid="uid://bm8dlke1bo2mf" path="res://cards/card_parts/lower_card_resources/vile_lich_lower.tres" id="25_oueoe"]
+[ext_resource type="Resource" uid="uid://bdrxgyojyllx6" path="res://cards/card_parts/lower_card_resources/man-eating_pitcher_plant_lower.tres" id="26_f1fv0"]
+[ext_resource type="Resource" uid="uid://cy2pm4idxf2pe" path="res://cards/card_parts/lower_card_resources/mermaid_lower.tres" id="27_t5731"]
+[ext_resource type="Resource" uid="uid://ccypptygd2t7r" path="res://cards/card_parts/lower_card_resources/exalted_angel_lower.tres" id="29_l3ubd"]
+[ext_resource type="Resource" uid="uid://dygta4sou86o4" path="res://cards/card_parts/lower_card_resources/giant_centipede_lower.tres" id="31_ig4rd"]
+[ext_resource type="Resource" uid="uid://c5xlaah78ncuw" path="res://cards/card_parts/lower_card_resources/valiant_knight_lower.tres" id="33_oueoe"]
 
 [node name="CardDatabaseManager" type="Node" unique_id=414585039]
 script = ExtResource("1_twdnv")
-upper_card_parts = Array[ExtResource("2_g4ohx")]([ExtResource("3_67ou5"), ExtResource("4_egdmf"), ExtResource("5_7eleq"), ExtResource("6_2rowf"), ExtResource("7_lm5u5")])
-lower_card_parts = Array[ExtResource("7_rjtrm")]([ExtResource("8_lm5u5"), ExtResource("9_ar4yc"), ExtResource("10_kav62"), ExtResource("11_0gq83"), ExtResource("13_ar4yc")])
+upper_card_parts = Array[ExtResource("2_g4ohx")]([ExtResource("3_67ou5"), ExtResource("4_egdmf"), ExtResource("5_7eleq"), ExtResource("6_2rowf"), ExtResource("7_lm5u5"), ExtResource("8_kav62"), ExtResource("9_iicqa"), ExtResource("10_g2ecq"), ExtResource("11_sjxvx"), ExtResource("12_lrybk"), ExtResource("13_l3ubd"), ExtResource("14_o5b54"), ExtResource("15_lrybk"), ExtResource("16_o5b54"), ExtResource("17_gltkn")])
+lower_card_parts = Array[ExtResource("7_rjtrm")]([ExtResource("8_lm5u5"), ExtResource("9_ar4yc"), ExtResource("10_kav62"), ExtResource("11_0gq83"), ExtResource("13_ar4yc"), ExtResource("15_0gq83"), ExtResource("17_i0ikc"), ExtResource("23_ig4rd"), ExtResource("24_gltkn"), ExtResource("25_oueoe"), ExtResource("26_f1fv0"), ExtResource("27_t5731"), ExtResource("29_l3ubd"), ExtResource("31_ig4rd"), ExtResource("33_oueoe")])

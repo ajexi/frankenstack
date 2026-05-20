@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://eqqt3ry8xat7"]
+
+[ext_resource type="Script" uid="uid://gjhlq18a06na" path="res://card_battles/input_manager.gd" id="1_1sgh0"]
+[ext_resource type="Script" uid="uid://bugrbn4qkg7lv" path="res://card_battles/card_manager.gd" id="2_lann1"]
+[ext_resource type="PackedScene" uid="uid://cenx6dnd8m2ws" path="res://card_battles/card_slot.tscn" id="3_3errm"]
+[ext_resource type="Script" uid="uid://qlkfrvh4f1qb" path="res://card_battles/player_hand.gd" id="4_53vph"]
+[ext_resource type="PackedScene" uid="uid://cv8nvvy8ugf8l" path="res://card_battles/deck.tscn" id="5_ee454"]
+[ext_resource type="PackedScene" uid="uid://d2re5apyn5eri" path="res://card_battles/opponent_deck.tscn" id="6_3errm"]
+[ext_resource type="Script" uid="uid://18b7ns3vh5b" path="res://card_battles/battle_manager.gd" id="6_lann1"]
+[ext_resource type="Script" uid="uid://boiwder46lj23" path="res://card_battles/opponent_hand.gd" id="8_53vph"]
+[ext_resource type="Script" uid="uid://ccqhdh2yllron" path="res://card_battles/opponent_deck.gd" id="8_ee454"]
+
+[node name="CardBattleScene" type="Node2D" unique_id=232271465]
+
+[node name="InputManager" type="Node2D" parent="." unique_id=938403068]
+unique_name_in_owner = true
+script = ExtResource("1_1sgh0")
+
+[node name="CardManager" type="Node2D" parent="." unique_id=1610359064]
+unique_name_in_owner = true
+script = ExtResource("2_lann1")
+
+[node name="PlayerCardSlots" type="Node2D" parent="." unique_id=1661850939]
+
+[node name="CreatureCardSlot" parent="PlayerCardSlots" unique_id=385052313 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(776, 644)
+
+[node name="CreatureCardSlot2" parent="PlayerCardSlots" unique_id=2131355707 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(1008, 644)
+
+[node name="CreatureCardSlot3" parent="PlayerCardSlots" unique_id=1205056186 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(1240, 644)
+
+[node name="TerrainCardSlot" parent="PlayerCardSlots" unique_id=536178455 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(549, 507)
+card_slot_type = "TERRAIN"
+
+[node name="OpponentCardSlots" type="Node2D" parent="." unique_id=934909916]
+unique_name_in_owner = true
+
+[node name="CreatureCardSlot" parent="OpponentCardSlots" unique_id=892324734 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(776, 378)
+card_slot_type = "OPPONENT_CREATURE"
+
+[node name="CreatureCardSlot2" parent="OpponentCardSlots" unique_id=1585683509 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(1008, 378)
+card_slot_type = "OPPONENT_CREATURE"
+
+[node name="CreatureCardSlot3" parent="OpponentCardSlots" unique_id=503864100 instance=ExtResource("3_3errm")]
+z_index = -1
+position = Vector2(1240, 378)
+card_slot_type = "OPPONENT_CREATURE"
+
+[node name="PlayerHand" type="Node2D" parent="." unique_id=2096211393]
+unique_name_in_owner = true
+script = ExtResource("4_53vph")
+
+[node name="PlayerDeck" parent="." unique_id=2116339862 instance=ExtResource("5_ee454")]
+unique_name_in_owner = true
+position = Vector2(150, 900)
+
+[node name="EndTurnButton" type="Button" parent="." unique_id=1703771042]
+unique_name_in_owner = true
+offset_left = 1390.0
+offset_top = 485.0
+offset_right = 1468.0
+offset_bottom = 516.0
+text = "End Turn"
+
+[node name="BattleManager" type="Node" parent="." unique_id=815939530]
+script = ExtResource("6_lann1")
+
+[node name="OpponentDeck" parent="." unique_id=141185510 instance=ExtResource("6_3errm")]
+unique_name_in_owner = true
+position = Vector2(1773, 163)
+script = ExtResource("8_ee454")
+
+[node name="OpponentHand" type="Node2D" parent="." unique_id=22390078]
+unique_name_in_owner = true
+script = ExtResource("8_53vph")
