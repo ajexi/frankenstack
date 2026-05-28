@@ -11,6 +11,12 @@
 [ext_resource type="Script" uid="uid://boiwder46lj23" path="res://card_battles/opponent_hand.gd" id="8_53vph"]
 [ext_resource type="Script" uid="uid://ccqhdh2yllron" path="res://card_battles/opponent_deck.gd" id="8_ee454"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kgs1"]
+bg_color = Color(1.92523e-06, 0.6386844, 0.9433952, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uotce"]
+bg_color = Color(0.73333335, 0, 0.101960786, 1)
+
 [node name="CardBattleScene" type="Node2D" unique_id=232271465]
 
 [node name="InputManager" type="Node2D" parent="." unique_id=938403068]
@@ -85,21 +91,6 @@ script = ExtResource("4_53vph")
 unique_name_in_owner = true
 position = Vector2(150, 900)
 
-[node name="EndTurnButton" type="Button" parent="." unique_id=1703771042]
-unique_name_in_owner = true
-offset_left = 1390.0
-offset_top = 485.0
-offset_right = 1468.0
-offset_bottom = 516.0
-text = "End Turn"
-
-[node name="BattleManager" type="Node" parent="." unique_id=815939530]
-unique_name_in_owner = true
-script = ExtResource("6_lann1")
-
-[node name="BattleTimer" type="Timer" parent="BattleManager" unique_id=1434166064]
-one_shot = true
-
 [node name="OpponentDeck" parent="." unique_id=141185510 instance=ExtResource("6_3errm")]
 unique_name_in_owner = true
 position = Vector2(1773, 163)
@@ -109,13 +100,20 @@ script = ExtResource("8_ee454")
 unique_name_in_owner = true
 script = ExtResource("8_53vph")
 
-[node name="LifePointsUI" type="Control" parent="." unique_id=298875762]
+[node name="BattleManager" type="Node" parent="." unique_id=815939530]
+unique_name_in_owner = true
+script = ExtResource("6_lann1")
+
+[node name="BattleTimer" type="Timer" parent="BattleManager" unique_id=1434166064]
+one_shot = true
+
+[node name="UI Elements" type="Control" parent="." unique_id=298875762]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlayerLifePointsLabel" type="RichTextLabel" parent="LifePointsUI" unique_id=830807972]
+[node name="PlayerLifePointsLabel" type="RichTextLabel" parent="UI Elements" unique_id=830807972]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 431.0
@@ -128,7 +126,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OpponentLifePointsLabel" type="RichTextLabel" parent="LifePointsUI" unique_id=1283370480]
+[node name="OpponentLifePointsLabel" type="RichTextLabel" parent="UI Elements" unique_id=1283370480]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 424.0
@@ -140,3 +138,42 @@ text = "XXXX"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="UI Elements" unique_id=1703771042]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1390.0
+offset_top = 485.0
+offset_right = 1468.0
+offset_bottom = 516.0
+text = "End Turn"
+
+[node name="PlayerActionPointBar" type="ProgressBar" parent="UI Elements" unique_id=1738304829]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 389.0
+offset_top = 349.0
+offset_right = 724.0
+offset_bottom = 376.0
+rotation = 1.5707964
+theme_override_styles/fill = SubResource("StyleBoxFlat_2kgs1")
+max_value = 5.0
+step = 1.0
+value = 3.0
+rounded = true
+fill_mode = 1
+
+[node name="OpponentActionPointBar" type="ProgressBar" parent="UI Elements" unique_id=597319386]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1637.0
+offset_top = 349.0
+offset_right = 1972.0
+offset_bottom = 376.0
+rotation = 1.5707964
+theme_override_styles/fill = SubResource("StyleBoxFlat_uotce")
+max_value = 5.0
+step = 1.0
+value = 3.0
+rounded = true
+fill_mode = 1

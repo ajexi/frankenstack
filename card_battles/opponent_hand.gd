@@ -6,7 +6,6 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 
 var opponent_hand: Array[EnemyCard] = []
 
-
 func _ready() -> void:
 	pass
 

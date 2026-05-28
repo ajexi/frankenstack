@@ -11,6 +11,7 @@ var player_deck = []
 @onready var deck_sprite: Sprite2D = %DeckSprite
 @onready var collision_shape_2d: CollisionShape2D = $CollisionArea/CollisionShape2D
 @onready var deck_size_label: RichTextLabel = %DeckSizeLabel
+@onready var battle_manager: BattleManager = %BattleManager
 
 func _ready() -> void:
 	player_deck = CardDatabaseManager.player_created_cards
@@ -21,7 +22,14 @@ func _ready() -> void:
 
 
 func draw_card() -> void:
+	if battle_manager.initial_board_setup_complete == true:
+		#Only draw a card if the player has enough Action Points
+		if battle_manager.player_action_points == 0:
+			return
+		battle_manager.player_action_points -= 1
+		battle_manager._player_action_point_bar.value = battle_manager.player_action_points
 	
+
 	var card_drawn = player_deck[0]
 	player_deck.erase(card_drawn)
 	

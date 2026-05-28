@@ -18,7 +18,7 @@ func _ready() -> void:
 	input_manager.left_mouse_button_released.connect(on_left_click_released)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if card_being_dragged:
 		var mouse_position = get_global_mouse_position()
 		#Moves the card's position to the mouse position and clamps it so it can't be moved past
@@ -37,15 +37,23 @@ func finish_drag() -> void:
 	card_being_dragged.scale = Vector2(1.05,1.05)
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
+		#there isn't already a card in the slot
 		if card_being_dragged.card_supertype == card_slot_found.card_slot_type:
-			player_hand.remove_card_from_hand(card_being_dragged)
-			#Card dropped into an empty card slot.\
-			is_hovering_on_card = false
-			card_being_dragged.position = card_slot_found.position
-			card_slot_found.card_in_slot = true
-			card_slot_found.collision_shape_2d.disabled = true
-			card_being_dragged.card_slot_card_is_in = card_slot_found
-			battle_manager.player_creatures_in_play.append(card_being_dragged)
+			#card is the correct type of slot for that card
+			if card_being_dragged.card_action_point_cost <= battle_manager.player_action_points:
+				#Player has enough action points to play the card
+				player_hand.remove_card_from_hand(card_being_dragged)
+				#Card dropped into an empty card slot.
+				is_hovering_on_card = false
+				card_being_dragged.position = card_slot_found.position
+				card_slot_found.card_in_slot = true
+				card_slot_found.collision_shape_2d.disabled = true
+				card_being_dragged.card_slot_card_is_in = card_slot_found
+				battle_manager.player_creatures_in_play.append(card_being_dragged)
+				battle_manager.player_action_points -= card_being_dragged.card_action_point_cost
+				battle_manager._player_action_point_bar.value = battle_manager.player_action_points
+			else:
+				player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 		else:
 			player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 	else:
@@ -139,16 +147,26 @@ func on_left_click_released() -> void:
 
 func card_clicked(card : PlayerCard) -> void:
 	if card.card_slot_card_is_in:
-		if battle_manager.is_opponents_turn == false:
-			if battle_manager.player_is_attacking == false:
-				#card is on field
-				if card not in battle_manager.player_cards_attacked_this_turn:
-					if battle_manager.opponent_creatures_in_play.size() == 0:
-						battle_manager.direct_attack(card, "Player")
-						battle_manager.player_cards_attacked_this_turn.append(card)
-						return
-					else:
-						select_card_for_battle(card)
+		#there's a card in the slot that can be clicked
+		if battle_manager.turn_number > 1:
+			#it's not the first turn
+			if battle_manager.is_opponents_turn == false:
+				#it's not the opponent's turn
+				if battle_manager.player_is_attacking == false:
+					#player is not already attacking
+					if card not in battle_manager.player_cards_attacked_this_turn:
+						#card hasn't already attacked this turn
+						if card.card_action_point_cost <= battle_manager.player_action_points:
+							#player can afford the cost to attack
+							if battle_manager.opponent_creatures_in_play.size() == 0:
+								#opponent has no creatures on the field
+								battle_manager.direct_attack(card, "Player")
+								battle_manager.player_action_points -= card.card_action_point_cost
+								battle_manager._player_action_point_bar.value = battle_manager.player_action_points
+								battle_manager.player_cards_attacked_this_turn.append(card)
+								return
+							else:
+								select_card_for_battle(card)
 	else:
 		#card in hand
 		start_drag(card)

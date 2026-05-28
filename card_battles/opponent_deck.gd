@@ -10,6 +10,7 @@ var opponent_deck = []
 @onready var opponent_hand: Node2D = %OpponentHand
 @onready var deck_sprite: Sprite2D = %DeckSprite
 @onready var deck_size_label: RichTextLabel = %DeckSizeLabel
+@onready var battle_manager: BattleManager = %BattleManager
 
 func _ready() -> void:
 	opponent_deck = CardDatabaseManager.test_opponent_deck
@@ -20,6 +21,14 @@ func _ready() -> void:
 
 
 func draw_card() -> void:
+	if battle_manager.initial_board_setup_complete == true:
+		if battle_manager.opponent_action_points == 0:
+			return
+		else:
+			battle_manager.opponent_action_points -= 1
+			battle_manager._opponent_action_point_bar.value = battle_manager.opponent_action_points
+		
+	
 	if opponent_deck.size() == 0:
 		return
 	

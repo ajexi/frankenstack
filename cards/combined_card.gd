@@ -15,7 +15,20 @@ var card_slot_card_is_in : CardSlot
 ##is in attack position.
 var is_in_defence_position : bool = false
 
+##Used to manage the card going to the discard pile after battle. True if the card
+##has been defeated in battle.
 var defeated : bool = false
+
+##a temporary variable used to distinguish a boosted/reduced attack as compared to the card's
+##original attack points
+var current_attack_points : int
+
+##a temporary variable used to distinguish a boosted/reduced defence as compared to the card's
+##original defence points
+var current_defence_points : int
+
+##The Action Point cost of playing the card. Calculated based on the current card rank.
+var card_action_point_cost : int
 
 @export var upper_card_part : UpperCardPart
 @export var lower_card_part : LowerCardPart
