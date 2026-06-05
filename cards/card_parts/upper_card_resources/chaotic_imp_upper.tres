@@ -9,4 +9,5 @@ upper_part_name = "Chaotic"
 attribute = "VOID"
 upper_card_type = "Demon"
 attack_points = 350
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

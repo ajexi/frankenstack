@@ -9,4 +9,5 @@ upper_part_name = "Vile"
 attribute = "VOID"
 upper_card_type = "Undead"
 attack_points = 2800
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LowerCardPart" format=3 uid="uid://njd16oip1ni7"]
+
+[ext_resource type="Texture2D" uid="uid://c0xg4xv80d2ep" path="res://cards/card_parts/card_images/bow_knight_lower.png" id="1_o124q"]
+[ext_resource type="Script" uid="uid://biq8vwcnh7tot" path="res://cards/card_parts/lower_card_part.gd" id="2_drs0a"]
+
+[resource]
+script = ExtResource("2_drs0a")
+lower_card_name = "Knight"
+lower_card_type = "Knight"
+defence_points = 700
+lower_card_image = ExtResource("1_o124q")
+lower_card_ability = "Scout"
+lower_card_ability_script = "uid://cewefwkhp1jku"
+metadata/_custom_type_script = "uid://biq8vwcnh7tot"

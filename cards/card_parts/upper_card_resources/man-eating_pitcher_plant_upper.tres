@@ -9,4 +9,5 @@ upper_part_name = "Man-Eating"
 attribute = "EARTH"
 upper_card_type = "Plant"
 attack_points = 1000
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

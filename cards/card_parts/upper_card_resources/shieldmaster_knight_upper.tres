@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://d1x1jai766d2l"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_0jepn"]
+[ext_resource type="Texture2D" uid="uid://0y6kslqhhgq7" path="res://cards/card_parts/card_images/sns_knight_upper.png" id="2_jlbko"]
+
+[resource]
+script = ExtResource("1_0jepn")
+upper_part_name = "Shieldmaster"
+attribute = "EARTH"
+upper_card_type = "Humanoid"
+attack_points = 700
+upper_card_image = ExtResource("2_jlbko")
+combined_card_supertype = "CREATURE"
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

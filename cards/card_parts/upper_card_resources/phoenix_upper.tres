@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_5o2x6")
-upper_part_name = "Phoe"
+upper_part_name = "Flaming"
 attribute = "FIRE"
 upper_card_type = "Elemental"
 attack_points = 1600
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://bywo2vm76jnnb"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_cwao4"]
+[ext_resource type="Texture2D" uid="uid://ckryoglb557j0" path="res://cards/card_parts/card_images/night_stalker_upper.png" id="2_cwao4"]
+
+[resource]
+script = ExtResource("1_cwao4")
+upper_part_name = "Night"
+attribute = "VOID"
+upper_card_type = "Demon"
+attack_points = 1700
+upper_card_image = ExtResource("2_cwao4")
+combined_card_supertype = "CREATURE"
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

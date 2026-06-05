@@ -40,19 +40,21 @@ var card_action_point_cost : int
 @onready var _attribute_label: Label = %AttributeLabel
 @onready var _card_name_label: Label = %CardNameLabel
 @onready var _card_rank_label: Label = %CardRankLabel
+@onready var _card_ability_label: Label = %CardAbilityLabel
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
-@export_enum('CREATURE', 'TERRAIN', 'MAGIC', 
-	'OPPONENT_CREATURE', 'OPPONENT_MAGIC') var card_supertype : String
+##A placeholder for the ability script to be attached to, if any, when instantiated.
+var ability_script
 
+var card_supertype : String
 
 ##Calculates the final rank of the card based on the combination of its attack and defence points.
 func calculate_card_rank() -> void:
-	if upper_card_part.attack_points + lower_card_part.defence_points <= 2500:
+	if upper_card_part.attack_points + (lower_card_part.defence_points) <= 2000:
 		card_rank = 1
-	elif upper_card_part.attack_points + lower_card_part.defence_points <= 4500:
+	elif upper_card_part.attack_points + (lower_card_part.defence_points) < 4001:
 		card_rank = 2
-	elif upper_card_part.attack_points + lower_card_part.defence_points > 4500:
+	elif upper_card_part.attack_points + (lower_card_part.defence_points) >= 4001:
 		card_rank = 3
 		
 	_card_rank_label.text = str(card_rank)

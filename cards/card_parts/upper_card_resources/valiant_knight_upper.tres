@@ -9,4 +9,5 @@ upper_part_name = "Valiant"
 attribute = "METAL"
 upper_card_type = "Humanoid"
 attack_points = 1400
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

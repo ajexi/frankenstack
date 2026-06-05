@@ -31,15 +31,15 @@ script = ExtResource("2_lann1")
 
 [node name="CreatureCardSlot" parent="PlayerCardSlots" unique_id=385052313 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(776, 644)
+position = Vector2(722, 644)
 
 [node name="CreatureCardSlot2" parent="PlayerCardSlots" unique_id=2131355707 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(1008, 644)
+position = Vector2(976, 644)
 
 [node name="CreatureCardSlot3" parent="PlayerCardSlots" unique_id=1205056186 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(1240, 644)
+position = Vector2(1229, 644)
 
 [node name="MagicCardSlot" parent="PlayerCardSlots" unique_id=1033611708 instance=ExtResource("3_3errm")]
 z_index = -1
@@ -48,7 +48,7 @@ card_slot_type = "MAGIC"
 
 [node name="TerrainCardSlot" parent="PlayerCardSlots" unique_id=536178455 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(549, 507)
+position = Vector2(478, 507)
 card_slot_type = "TERRAIN"
 
 [node name="OpponentCardSlots" type="Node2D" parent="." unique_id=934909916]
@@ -56,36 +56,23 @@ unique_name_in_owner = true
 
 [node name="CreatureCardSlot" parent="OpponentCardSlots" unique_id=892324734 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(776, 378)
+position = Vector2(722, 378)
 card_slot_type = "OPPONENT_CREATURE"
 
 [node name="CreatureCardSlot2" parent="OpponentCardSlots" unique_id=1585683509 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(1008, 378)
+position = Vector2(976, 378)
 card_slot_type = "OPPONENT_CREATURE"
 
 [node name="CreatureCardSlot3" parent="OpponentCardSlots" unique_id=503864100 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(1240, 378)
+position = Vector2(1229, 378)
 card_slot_type = "OPPONENT_CREATURE"
 
-[node name="MagicCardSlot" parent="OpponentCardSlots" unique_id=1132819081 instance=ExtResource("3_3errm")]
+[node name="OpponentMagicCardSlot" parent="OpponentCardSlots" unique_id=1132819081 instance=ExtResource("3_3errm")]
 z_index = -1
 position = Vector2(1474, 301)
 card_slot_type = "OPPONENT_MAGIC"
-
-[node name="DiscardPile" parent="." unique_id=655734578 instance=ExtResource("4_2kgs1")]
-position = Vector2(150, 635)
-discard_pile_owner = "PLAYER"
-
-[node name="OpponentDiscardPile" parent="." unique_id=1421648542 instance=ExtResource("4_2kgs1")]
-z_index = -1
-position = Vector2(1771, 426)
-discard_pile_owner = "PLAYER"
-
-[node name="PlayerHand" type="Node2D" parent="." unique_id=2096211393]
-unique_name_in_owner = true
-script = ExtResource("4_53vph")
 
 [node name="PlayerDeck" parent="." unique_id=2116339862 instance=ExtResource("5_ee454")]
 unique_name_in_owner = true
@@ -96,13 +83,29 @@ unique_name_in_owner = true
 position = Vector2(1773, 163)
 script = ExtResource("8_ee454")
 
+[node name="DiscardPile" parent="." unique_id=655734578 instance=ExtResource("4_2kgs1")]
+z_index = -1
+position = Vector2(150, 635)
+discard_pile_owner = "PLAYER"
+
+[node name="OpponentDiscardPile" parent="." unique_id=1421648542 instance=ExtResource("4_2kgs1")]
+z_index = -1
+position = Vector2(1771, 426)
+discard_pile_owner = "OPPONENT"
+
+[node name="PlayerHand" type="Node2D" parent="." unique_id=2096211393]
+unique_name_in_owner = true
+script = ExtResource("4_53vph")
+
 [node name="OpponentHand" type="Node2D" parent="." unique_id=22390078]
 unique_name_in_owner = true
 script = ExtResource("8_53vph")
 
-[node name="BattleManager" type="Node" parent="." unique_id=815939530]
+[node name="BattleManager" type="Node" parent="." unique_id=815939530 node_paths=PackedStringArray("_opponent_magic_card_slot", "_terrain_card_slot")]
 unique_name_in_owner = true
 script = ExtResource("6_lann1")
+_opponent_magic_card_slot = NodePath("../OpponentCardSlots/OpponentMagicCardSlot")
+_terrain_card_slot = NodePath("../PlayerCardSlots/TerrainCardSlot")
 
 [node name="BattleTimer" type="Timer" parent="BattleManager" unique_id=1434166064]
 one_shot = true
@@ -116,9 +119,9 @@ offset_bottom = 40.0
 [node name="PlayerLifePointsLabel" type="RichTextLabel" parent="UI Elements" unique_id=830807972]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 431.0
+offset_left = 360.0
 offset_top = 689.0
-offset_right = 672.0
+offset_right = 601.0
 offset_bottom = 759.0
 theme_override_font_sizes/normal_font_size = 51
 text = "XXXX"
@@ -129,9 +132,9 @@ vertical_alignment = 1
 [node name="OpponentLifePointsLabel" type="RichTextLabel" parent="UI Elements" unique_id=1283370480]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 424.0
+offset_left = 353.0
 offset_top = 262.0
-offset_right = 679.0
+offset_right = 608.0
 offset_bottom = 332.0
 theme_override_font_sizes/normal_font_size = 51
 text = "XXXX"
@@ -151,15 +154,14 @@ text = "End Turn"
 [node name="PlayerActionPointBar" type="ProgressBar" parent="UI Elements" unique_id=1738304829]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 389.0
+offset_left = 335.0
 offset_top = 349.0
-offset_right = 724.0
+offset_right = 670.0
 offset_bottom = 376.0
 rotation = 1.5707964
 theme_override_styles/fill = SubResource("StyleBoxFlat_2kgs1")
 max_value = 5.0
 step = 1.0
-value = 3.0
 rounded = true
 fill_mode = 1
 
@@ -174,6 +176,5 @@ rotation = 1.5707964
 theme_override_styles/fill = SubResource("StyleBoxFlat_uotce")
 max_value = 5.0
 step = 1.0
-value = 3.0
 rounded = true
 fill_mode = 1

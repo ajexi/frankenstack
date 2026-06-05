@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LowerCardPart" format=3 uid="uid://btx0rpapfinwc"]
+
+[ext_resource type="Texture2D" uid="uid://cyxjpk73jpw2w" path="res://cards/card_parts/card_images/night_patrician_lower.png" id="1_082qn"]
+[ext_resource type="Script" uid="uid://biq8vwcnh7tot" path="res://cards/card_parts/lower_card_part.gd" id="2_7gvw1"]
+
+[resource]
+script = ExtResource("2_7gvw1")
+lower_card_name = "Patrician"
+lower_card_type = "Humanoid"
+defence_points = 600
+lower_card_image = ExtResource("1_082qn")
+metadata/_custom_type_script = "uid://biq8vwcnh7tot"

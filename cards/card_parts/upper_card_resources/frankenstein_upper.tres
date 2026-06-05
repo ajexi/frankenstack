@@ -9,4 +9,5 @@ upper_part_name = "Franken"
 attribute = "EARTH"
 upper_card_type = "Undead"
 attack_points = 2000
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

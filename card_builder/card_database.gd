@@ -6,6 +6,9 @@ const LOWER_CARD_RESOURCE_PATH : String = "res://cards/card_parts/lower_card_res
 @export var upper_card_parts : Array[UpperCardPart] = []
 @export var lower_card_parts : Array[LowerCardPart] = []
 
+##This will be an Array of Arrays; the second array dimension is as such:
+##[upper card part, lower card part]
 var player_created_cards = []
 
+var player_created_deck = []
 var test_opponent_deck = []

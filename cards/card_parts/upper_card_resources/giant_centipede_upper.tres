@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_h4ot0")
-upper_part_name = "Giant Cent"
+upper_part_name = "Centipede"
 attribute = "EARTH"
 upper_card_type = "Insect"
 attack_points = 1500
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

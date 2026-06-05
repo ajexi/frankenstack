@@ -9,4 +9,5 @@ upper_part_name = "Atlas"
 attribute = "AIR"
 upper_card_type = "Kaiju"
 attack_points = 2700
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

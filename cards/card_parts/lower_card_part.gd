@@ -13,3 +13,7 @@ class_name LowerCardPart extends Resource
 @export_range(0, 10000, 50) var defence_points : int
 ##The card part's image texture.
 @export var lower_card_image : Texture = preload("uid://dho2pawq0baia")
+##The name of the card part's special ability.
+@export var lower_card_ability : String 
+##A string filepath to the card's ability script.
+@export var lower_card_ability_script : String

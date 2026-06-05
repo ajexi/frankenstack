@@ -45,6 +45,16 @@ text = "Humanoid"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="AbilityLabel" type="Label" parent="." unique_id=1243255940]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 178.0
+offset_right = 220.0
+offset_bottom = 201.0
+text = "Ability"
+vertical_alignment = 1
+
 [node name="DefencePointsLabel" type="Label" parent="." unique_id=141011674]
 unique_name_in_owner = true
 layout_mode = 0

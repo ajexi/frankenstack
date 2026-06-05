@@ -13,7 +13,7 @@ config_version=5
 config/name="Frankenstack"
 run/main_scene="uid://dovn4gh1inc3n"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://di8hbv8ljf4ep"
 
 [autoload]
 
@@ -24,6 +24,7 @@ CardDatabaseManager="*uid://csf7qdqgtmniq"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [physics]
 
@@ -31,6 +32,7 @@ window/stretch/mode="canvas_items"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

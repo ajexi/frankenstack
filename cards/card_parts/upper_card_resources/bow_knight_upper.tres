@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://bx2pssl4s2m6c"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_vjf4t"]
+[ext_resource type="Texture2D" uid="uid://bdwhoi8r130b8" path="res://cards/card_parts/card_images/bow_knight_upper.png" id="2_8fwnp"]
+
+[resource]
+script = ExtResource("1_vjf4t")
+upper_part_name = "Bowmaster"
+attribute = "AIR"
+upper_card_type = "Humanoid"
+attack_points = 1200
+upper_card_image = ExtResource("2_8fwnp")
+combined_card_supertype = "CREATURE"
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

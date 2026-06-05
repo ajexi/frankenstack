@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://dyjgleddqr6as"]
+
+[ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_16xn7"]
+[ext_resource type="Texture2D" uid="uid://bj62wt6jkct4v" path="res://cards/card_parts/card_images/broadsword_knight_upper.png" id="2_f3a1k"]
+
+[resource]
+script = ExtResource("1_16xn7")
+upper_part_name = "Swordmaster"
+attribute = "METAL"
+upper_card_type = "Humanoid"
+attack_points = 2000
+upper_card_image = ExtResource("2_f3a1k")
+combined_card_supertype = "CREATURE"
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

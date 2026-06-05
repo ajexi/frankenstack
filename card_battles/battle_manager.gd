@@ -1,3 +1,4 @@
+@icon ("res://addons/at-icons/node/dagger.svg")
 class_name BattleManager extends Node
 
 #constant for managing card animation speed
@@ -25,6 +26,9 @@ const STARTING_LIFE_POINTS : int = 4000
 @onready var _player_action_point_bar: ProgressBar = %PlayerActionPointBar
 @onready var _opponent_action_point_bar: ProgressBar = %OpponentActionPointBar
 
+@export var _opponent_magic_card_slot : CardSlot
+@export var _terrain_card_slot : CardSlot
+
 ##These arrays manage where a card is in relation to the field.
 var opponent_empty_monster_card_slots = []
 var opponent_creatures_in_play : Array[EnemyCard] = []
@@ -38,6 +42,7 @@ var opponent_life_points : int
 var initial_board_setup_complete : bool = false
 var is_opponents_turn : bool = false
 var player_is_attacking : bool = false
+var opponent_scouting_card : bool = false
 
 ##Manages the current turn number. Used to manage current Action Points and whether a first turn
 ##player can attack.
@@ -79,6 +84,7 @@ func _ready() -> void:
 		if slot.card_slot_type == 'OPPONENT_CREATURE':
 			opponent_empty_monster_card_slots.append(slot)
 
+##Resets the action points of the turn player.
 func begin_turn(turn_player : String) -> void:
 	if turn_player == "Player":
 		if turn_number < MAXIMUM_ACTION_POINTS:
@@ -97,13 +103,13 @@ func begin_turn(turn_player : String) -> void:
 func _on_end_turn_button_pressed() -> void:
 	card_manager.unselect_selected_creature()
 	player_cards_attacked_this_turn.clear()
-	turn_number += 1
 	opponent_turn()
 
 
 func opponent_turn() -> void:
 	begin_turn("Opponent")
 	await wait(0.1)
+	#turn start cleanup
 	is_opponents_turn = true
 	_end_turn_button.disabled = true
 	_end_turn_button.visible = false
@@ -111,14 +117,19 @@ func opponent_turn() -> void:
 		card._collision_area.disabled = true
 	_player_deck.collision_shape_2d.disabled = true
 	
+	await wait(1.0)
+	#first, if there is already a playable card in hand, play that
+	if opponent_empty_monster_card_slots.size() != 0:
+		try_play_card_with_highest_atk()
 	await wait(0.5)
-	if _opponent_deck.opponent_deck.size() != 0:
+	#then, draw a card if able
+	if _opponent_deck.opponent_deck.size() != 0 and opponent_action_points > 0:
 		_opponent_deck.draw_card()
 	
 	#Wait 1 second for opponent thinking.
 	await wait(1.0)
 	
-	#Check if monster card slots, and if no, end turn.
+	#Check if monster card slots, and try to play a creature.
 	if opponent_empty_monster_card_slots.size() != 0:
 		try_play_card_with_highest_atk()
 		
@@ -128,12 +139,27 @@ func opponent_turn() -> void:
 	#Try attack
 	if opponent_creatures_in_play.size() != 0:
 		var opponent_cards_to_attack = opponent_creatures_in_play.duplicate()
-		for card in opponent_cards_to_attack:
-			if player_creatures_in_play.size() == 0:
-				await direct_attack(card, "Opponent")
+		for card : EnemyCard in opponent_cards_to_attack:
+			#loop through player's field
+			if card.card_action_point_cost > opponent_action_points:
+				pass
 			else:
-				var card_to_attack : CombinedCard = player_creatures_in_play.pick_random()
-				await attack(card, card_to_attack, "Opponent", "Player")
+				if player_creatures_in_play.size() == 0:
+					opponent_action_points -= card.card_action_point_cost
+					_opponent_action_point_bar.value = opponent_action_points
+					await direct_attack(card, "Opponent")
+				else:
+					#choose a random card to attack
+					var card_to_attack : CombinedCard = player_creatures_in_play.pick_random()
+					opponent_action_points -= card.card_action_point_cost
+					_opponent_action_point_bar.value = opponent_action_points
+					await attack(card, card_to_attack, "Opponent", "Player")
+				
+	
+	#if any AP left at the end of the turn, draw cards
+	if opponent_action_points > 0:
+		for ap in opponent_action_points:
+			_opponent_deck.draw_card()
 	
 	#End turn
 	end_opponent_turn()
@@ -146,15 +172,17 @@ func end_opponent_turn() -> void:
 		card._collision_area.disabled = false
 	_player_deck.collision_shape_2d.disabled = false
 	is_opponents_turn = false
+	turn_number += 1
 	begin_turn("Player")
 	
 
+##Opponent AI function.
+##There will be more of these in future, this is a basic function that just plays the card in hand
+##with the highest attack, if the opponent can afford it
 func try_play_card_with_highest_atk() -> void:
 	#Play card in hand with highest attack
 	if _opponent_hand.opponent_hand.size() == 0:
 		end_opponent_turn()
-	var random_empty_monster_card_slot = opponent_empty_monster_card_slots.pick_random()
-	opponent_empty_monster_card_slots.erase(random_empty_monster_card_slot)
 	#Start by assuming the first card in hand has the highest attack.
 	var current_card_with_highest_atk = _opponent_hand.opponent_hand[0]
 	#loop through the cards in hand to check all of their ATK values. If one is higher than
@@ -168,21 +196,36 @@ func try_play_card_with_highest_atk() -> void:
 		await wait(1.0)
 		return
 	
+	await opponent_play_creature_card(current_card_with_highest_atk)
+	
+	await wait(1.0)
+
+
+##Opponent will play the creature card passed to this function.
+func opponent_play_creature_card(card : EnemyCard) -> void:
+	var random_empty_monster_card_slot : CardSlot = opponent_empty_monster_card_slots.pick_random()
+	opponent_empty_monster_card_slots.erase(random_empty_monster_card_slot)
+	
 	#Animate card into position
 	var tween = create_tween()
-	tween.tween_property(current_card_with_highest_atk, "position", random_empty_monster_card_slot.position, CARD_MOVE_SPEED)
-	current_card_with_highest_atk.animation_player.play('card_flip')
+	tween.tween_property(card, "position", random_empty_monster_card_slot.position, CARD_MOVE_SPEED)
+	card.animation_player.play('card_flip')
 	
 	#deduct the Action Point cost of the card
-	opponent_action_points -= current_card_with_highest_atk.card_action_point_cost
+	opponent_action_points -= card.card_action_point_cost
 	_opponent_action_point_bar.value = opponent_action_points
 	
 	#Remove card from opponent's hand
-	_opponent_hand.remove_card_from_hand(current_card_with_highest_atk)
-	current_card_with_highest_atk.card_slot_card_is_in = random_empty_monster_card_slot
-	opponent_creatures_in_play.append(current_card_with_highest_atk)
+	_opponent_hand.remove_card_from_hand(card)
+	card.card_slot_card_is_in = random_empty_monster_card_slot
+	opponent_creatures_in_play.append(card)
 	
-	await wait(1.0)
+	random_empty_monster_card_slot.collision_shape_2d.disabled = true
+	
+	#activate card ability, if there is one.
+	if card.lower_card_part.lower_card_ability_script != "" or null:
+		card.ability_script.trigger_ability(card_manager, self, card, 'Opponent')
+	await wait(0.5)
 
 
 func direct_attack(attacking_card : CombinedCard, attacker : String) -> void:
@@ -261,15 +304,15 @@ func attack(attacking_card : CombinedCard, defending_card : CombinedCard, attack
 	
 	#deal damage
 	var card_was_destroyed : bool = false
-	if attacking_card.upper_card_part.attack_points > stat_being_attacked:
+	if attacking_card.upper_card_part.current_attack_points > stat_being_attacked:
 		var remainder_damage = attacking_card.current_attack_points - stat_being_attacked
 		if defending_card.is_in_defence_position == false:
 			if attacker == "Opponent":
 				damage_player_life_points(remainder_damage)
 			else:
 				damage_opponent_life_points(remainder_damage)
-			destroy_card(defending_card, defender)
-			card_was_destroyed = true
+		destroy_card(defending_card, defender)
+		card_was_destroyed = true
 	elif attacking_card.current_attack_points == stat_being_attacked:
 		if defending_card.is_in_defence_position == false:
 			destroy_card(attacking_card, attacker)
@@ -323,15 +366,23 @@ func destroy_card(card : CombinedCard, card_owner: String) -> void:
 		new_pos = _player_discard_pile.position
 		if card in player_creatures_in_play:
 			player_creatures_in_play.erase(card)
-		card.card_slot_card_is_in.collision_shape_2d.disabled = false
+		if card.card_slot_card_is_in:
+			card.card_slot_card_is_in.collision_shape_2d.disabled = false
 	else:
 		new_pos = _opponent_discard_pile.position
 		if card in opponent_creatures_in_play:
 			opponent_creatures_in_play.erase(card)
 			opponent_empty_monster_card_slots.append(card.card_slot_card_is_in)
 			
-	card.card_slot_card_is_in.card_in_slot = false
-	card.card_slot_card_is_in = null
+	if card.is_in_defence_position:
+		var rotation_tween = create_tween()
+		rotation_tween.tween_property(card, "global_rotation", 0, 0.2)
+	
+	card.animation_player.play_backwards("card_flip")
+	if card.card_slot_card_is_in:
+		card.card_slot_card_is_in.collision_shape_2d.disabled = false
+		card.card_slot_card_is_in.card_in_slot = false
+		card.card_slot_card_is_in = null
 	
 	var tween = create_tween()
 	tween.tween_property(card, "position", new_pos, CARD_MOVE_SPEED)

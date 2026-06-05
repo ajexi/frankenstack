@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_3grwt")
-lower_card_name = " Lich"
+lower_card_name = "Lich"
 lower_card_type = "Spellcaster"
 defence_points = 2400
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

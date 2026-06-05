@@ -35,7 +35,7 @@ func animate_card_to_position(card, new_position, speed) -> void:
 
 func calculate_card_position(index):
 	var x_offset = (player_hand.size() - 1) * CARD_WIDTH
-	var x_position = centre_screen_x + index * CARD_WIDTH - x_offset / 2
+	var x_position = get_viewport().size.x / 2 + index * CARD_WIDTH - x_offset / 2
 	return x_position
 	
 

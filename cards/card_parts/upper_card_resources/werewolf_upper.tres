@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_6lkt5")
-upper_part_name = "Were"
+upper_part_name = "Werewolf"
 attribute = "EARTH"
 upper_card_type = "Beast"
 attack_points = 2500
 upper_card_image = ExtResource("2_hmmrw")
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

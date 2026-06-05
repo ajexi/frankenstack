@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_fn16v")
-lower_card_name = " Knight"
+lower_card_name = "Knight"
 lower_card_type = "Knight"
 defence_points = 1000
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

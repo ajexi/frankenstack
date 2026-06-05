@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_mddjt")
-upper_part_name = "Mer"
+upper_part_name = "Mermaid"
 attribute = "WATER"
 upper_card_type = "Humanoid"
 attack_points = 1200
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

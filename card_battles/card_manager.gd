@@ -1,4 +1,7 @@
+@icon ("res://addons/at-icons/node2d/book.svg")
 class_name CardManager extends Node2D
+
+signal position_selected
 
 const CARD_COLLISION_MASK: int = 1
 const CARD_SLOT_COLLISION_MASK: int = 2
@@ -8,6 +11,8 @@ var card_being_dragged: CombinedCard
 var screen_size: Vector2
 var is_hovering_on_card: bool
 var selected_creature : PlayerCard
+var menu_open : bool = false
+var scouting_cards : bool = false
 
 @onready var player_hand: Node2D = %PlayerHand
 @onready var input_manager: InputManager = %InputManager
@@ -28,9 +33,10 @@ func _process(_delta: float) -> void:
 
 
 func start_drag(card) -> void:
-	card_being_dragged = card
-	card_being_dragged.z_index = 2
-	card.scale = Vector2(1,1)
+	if menu_open == false:
+		card_being_dragged = card
+		card_being_dragged.z_index = 2
+		card.scale = Vector2(1,1)
 	
 
 func finish_drag() -> void:
@@ -45,19 +51,47 @@ func finish_drag() -> void:
 				player_hand.remove_card_from_hand(card_being_dragged)
 				#Card dropped into an empty card slot.
 				is_hovering_on_card = false
+				#Move the card to the card slot position
 				card_being_dragged.position = card_slot_found.position
 				card_slot_found.card_in_slot = true
 				card_slot_found.collision_shape_2d.disabled = true
+				#Get a reference to the slot the card has been placed in.
 				card_being_dragged.card_slot_card_is_in = card_slot_found
-				battle_manager.player_creatures_in_play.append(card_being_dragged)
+				#Deduct action points.
 				battle_manager.player_action_points -= card_being_dragged.card_action_point_cost
 				battle_manager._player_action_point_bar.value = battle_manager.player_action_points
+				#Create a position selection menu if the card is a creature.
+				if card_being_dragged.card_supertype == "CREATURE":
+					battle_manager.player_creatures_in_play.append(card_being_dragged)
+					var card_played = card_being_dragged
+					const POSITION_MENU = preload("uid://bsjaief2eo471")
+					var new_position_menu = POSITION_MENU.instantiate() as PositionMenu
+					menu_open = true
+					battle_manager._end_turn_button.disabled = true
+					card_slot_found.collision_shape_2d.disabled = true
+					new_position_menu.global_position = card_played.global_position
+					add_child(new_position_menu)
+					new_position_menu.attack_position_button.pressed.connect(func() -> void:
+						menu_open = false
+						battle_manager._end_turn_button.disabled = false
+						position_selected.emit()
+						new_position_menu.queue_free())
+					new_position_menu.defence_position_button.pressed.connect(func() -> void:
+						card_played.global_rotation_degrees = -90.0
+						card_played.is_in_defence_position = true
+						menu_open = false
+						battle_manager._end_turn_button.disabled = false
+						position_selected.emit()
+						new_position_menu.queue_free())
+				if card_being_dragged.lower_card_part.lower_card_ability_script != "" or null:
+					card_being_dragged.ability_script.trigger_ability(self, battle_manager, card_being_dragged, 'Player')
 			else:
 				player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 		else:
 			player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 	else:
 		player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
+	
 	card_being_dragged.scale = Vector2(1,1)
 	card_being_dragged.z_index = 1
 	card_being_dragged = null
@@ -154,19 +188,23 @@ func card_clicked(card : PlayerCard) -> void:
 				#it's not the opponent's turn
 				if battle_manager.player_is_attacking == false:
 					#player is not already attacking
-					if card not in battle_manager.player_cards_attacked_this_turn:
-						#card hasn't already attacked this turn
-						if card.card_action_point_cost <= battle_manager.player_action_points:
-							#player can afford the cost to attack
-							if battle_manager.opponent_creatures_in_play.size() == 0:
-								#opponent has no creatures on the field
-								battle_manager.direct_attack(card, "Player")
-								battle_manager.player_action_points -= card.card_action_point_cost
-								battle_manager._player_action_point_bar.value = battle_manager.player_action_points
-								battle_manager.player_cards_attacked_this_turn.append(card)
-								return
-							else:
-								select_card_for_battle(card)
+					if menu_open == false:
+						#there is not a menu open taking priority
+						if card not in battle_manager.player_cards_attacked_this_turn:
+							#card hasn't already attacked this turn
+							if card.is_in_defence_position == false:
+								#card is in attack position
+								if card.card_action_point_cost <= battle_manager.player_action_points:
+									#player can afford the cost to attack
+									if battle_manager.opponent_creatures_in_play.size() == 0:
+										#opponent has no creatures on the field
+										battle_manager.direct_attack(card, "Player")
+										battle_manager.player_action_points -= card.card_action_point_cost
+										battle_manager._player_action_point_bar.value = battle_manager.player_action_points
+										battle_manager.player_cards_attacked_this_turn.append(card)
+										return
+									else:
+										select_card_for_battle(card)
 	else:
 		#card in hand
 		start_drag(card)

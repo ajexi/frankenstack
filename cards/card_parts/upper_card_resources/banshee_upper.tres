@@ -1,11 +1,14 @@
 [gd_resource type="Resource" script_class="UpperCardPart" format=3 uid="uid://bfwfuqbeyxuaa"]
 
 [ext_resource type="Script" uid="uid://c1f08w6pxt3hf" path="res://cards/card_parts/upper_card_part.gd" id="1_6dybj"]
-[ext_resource type="Texture2D" uid="uid://b5wv600nibtc8" path="res://cards/card_parts/card_images/upper_card_base.png" id="2_4d3ty"]
+[ext_resource type="Texture2D" uid="uid://bd1tlgdnbdknh" path="res://cards/card_parts/card_images/banshee_upper.png" id="2_6dybj"]
 
 [resource]
 script = ExtResource("1_6dybj")
-upper_part_name = "Ban"
+upper_part_name = "Howling"
 attribute = "AIR"
 upper_card_type = "Undead"
+attack_points = 100
+upper_card_image = ExtResource("2_6dybj")
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

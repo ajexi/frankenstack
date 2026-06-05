@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_hix1w")
-lower_card_name = " Moth"
+lower_card_name = "Moth"
 lower_card_type = "Insect"
 defence_points = 1700
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

@@ -12,3 +12,5 @@ class_name UpperCardPart extends Resource
 @export_range(0, 10000, 50) var attack_points : int
 ##The card part's image texture.
 @export var upper_card_image : Texture = preload("uid://b5wv600nibtc8")
+##The final CombinedCard supertype.
+@export_enum("CREATURE", "MAGIC", "TERRAIN") var combined_card_supertype : String

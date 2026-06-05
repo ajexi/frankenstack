@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_ae10h")
-upper_part_name = "Vamp"
+upper_part_name = "Vampire"
 attribute = "VOID"
 upper_card_type = "Vampire"
 attack_points = 3000
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

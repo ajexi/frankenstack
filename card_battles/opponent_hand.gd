@@ -1,7 +1,7 @@
 class_name OpponentHand extends Node2D
 
 const CARD_WIDTH = 200
-const HAND_Y_POSITION = 125
+const HAND_Y_POSITION = 0
 const DEFAULT_CARD_MOVE_SPEED = 0.1
 
 var opponent_hand: Array[EnemyCard] = []

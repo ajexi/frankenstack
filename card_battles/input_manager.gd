@@ -1,3 +1,4 @@
+@icon ("res://addons/at-icons/node2d/mouse.svg")
 class_name InputManager extends Node2D
 
 const CARD_COLLISION_MASK: int = 1

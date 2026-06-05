@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_n41e6")
-upper_part_name = "Skele"
+upper_part_name = "Skeleton"
 attribute = "METAL"
 upper_card_type = "Undead"
 attack_points = 300
+combined_card_supertype = "CREATURE"
 metadata/_custom_type_script = "uid://c1f08w6pxt3hf"

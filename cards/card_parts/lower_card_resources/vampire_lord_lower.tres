@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_j3anm")
-lower_card_name = "ire Lord"
+lower_card_name = "Lord"
 lower_card_type = "Humanoid"
 defence_points = 1200
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

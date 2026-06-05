@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_evc6s")
-lower_card_name = "wolf"
+lower_card_name = "Hunter"
 lower_card_type = "Humanoid"
 defence_points = 1600
 lower_card_image = ExtResource("1_r4vy3")

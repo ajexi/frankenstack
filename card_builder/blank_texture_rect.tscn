@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bi6pi4upxr82r"]
+
+[ext_resource type="Texture2D" uid="uid://dhxkp0h7rg3nl" path="res://card_builder/blank_texture_rect.png" id="1_1an5s"]
+
+[node name="BlankTextureRect" type="TextureRect" unique_id=1558195513]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1an5s")
