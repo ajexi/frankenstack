@@ -9,4 +9,6 @@ lower_card_name = "Hunter"
 lower_card_type = "Humanoid"
 defence_points = 1600
 lower_card_image = ExtResource("1_r4vy3")
+lower_card_ability = "Burn"
+lower_card_ability_script = "uid://8qoy4xx1d1m6"
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

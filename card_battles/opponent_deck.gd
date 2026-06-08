@@ -5,6 +5,7 @@ const CARD_SCENE_PATH = "uid://blkx3viqrb1x8"
 const CARD_DRAW_SPEED = 0.3
 const STARTING_HAND_COUNT := 4
 
+@export var opponent_decklist : SavedDeck
 var opponent_deck = []
 
 @onready var card_manager: CardManager = %CardManager
@@ -13,8 +14,11 @@ var opponent_deck = []
 @onready var deck_size_label: RichTextLabel = %DeckSizeLabel
 @onready var battle_manager: BattleManager = %BattleManager
 
+
 func _ready() -> void:
-	opponent_deck = CardDatabaseManager.player_created_deck.duplicate()
+	for card in opponent_decklist.deck_list:
+		opponent_deck.append(card)
+	
 	opponent_deck.shuffle()
 	deck_size_label.text = str(opponent_deck.size())
 	for i in STARTING_HAND_COUNT:

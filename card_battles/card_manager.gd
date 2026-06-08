@@ -17,6 +17,7 @@ var scouting_cards : bool = false
 @onready var player_hand: Node2D = %PlayerHand
 @onready var input_manager: InputManager = %InputManager
 @onready var battle_manager: BattleManager = %BattleManager
+@onready var particle_effect_manager: ParticleEffectManager = %ParticleEffectManager
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -84,7 +85,8 @@ func finish_drag() -> void:
 						position_selected.emit()
 						new_position_menu.queue_free())
 				if card_being_dragged.lower_card_part.lower_card_ability_script != "" or null:
-					card_being_dragged.ability_script.trigger_ability(self, battle_manager, card_being_dragged, 'Player')
+					card_being_dragged.ability_script.trigger_ability(self, battle_manager, card_being_dragged, 'Player', 'on_played')
+					
 			else:
 				player_hand.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 		else:

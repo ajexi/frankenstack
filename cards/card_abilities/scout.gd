@@ -3,10 +3,15 @@ extends CardAbility
 var scouted_cards = []
 
 func trigger_ability(card_manager: CardManager, battle_manager: BattleManager, 
-	card : CombinedCard, turn_player: String) -> void:
+	card : CombinedCard, turn_player: String, effect_trigger : String) -> void:
+	
+	if effect_trigger != 'on_played':
+		return
 	
 	if card.card_supertype == 'CREATURE' and turn_player == 'Player':
 		await card_manager.position_selected
+	
+	card_manager.particle_effect_manager.effect_activation(card)
 	
 	var deck
 	if turn_player == 'Player':
@@ -15,9 +20,9 @@ func trigger_ability(card_manager: CardManager, battle_manager: BattleManager,
 		deck = battle_manager._opponent_deck.opponent_deck
 	
 	#loop through the scouted cards to find ones with matching types
-	for cards in deck.size():
-		if deck[cards - 1][0].upper_card_type == card.upper_card_part.upper_card_type or card.lower_card_part.lower_card_type:
-			scouted_cards.append(deck[cards - 1])
+	for cards in deck:
+		if cards[1].lower_card_type == card.upper_card_part.upper_card_type or cards[1].lower_card_type == card.lower_card_part.lower_card_type:
+			scouted_cards.append(cards)
 	
 	if turn_player == 'Player':
 		var new_targeting_menu : TargetingMenu = TARGETING_MENU.instantiate()
@@ -61,3 +66,5 @@ func trigger_ability(card_manager: CardManager, battle_manager: BattleManager,
 			deck.insert(0, scouted_opponent_card)
 			battle_manager._opponent_deck.draw_card()
 			battle_manager.opponent_scouting_card = false
+	
+	deck.shuffle()

@@ -9,4 +9,6 @@ lower_card_name = "Stalker"
 lower_card_type = "Humanoid"
 defence_points = 1000
 lower_card_image = ExtResource("1_2frwd")
+lower_card_ability = "Drain Life"
+lower_card_ability_script = "uid://bt3piobljt7qm"
 metadata/_custom_type_script = "uid://biq8vwcnh7tot"

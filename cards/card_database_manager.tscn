@@ -9,16 +9,38 @@
 [ext_resource type="Resource" uid="uid://d1pswiasmonq2" path="res://cards/card_parts/lower_card_resources/werewolf_lower.tres" id="8_lm5u5"]
 [ext_resource type="Resource" uid="uid://bmm2x56oc8cit" path="res://cards/card_parts/lower_card_resources/banshee_lower.tres" id="9_ar4yc"]
 [ext_resource type="Resource" uid="uid://d1x1jai766d2l" path="res://cards/card_parts/upper_card_resources/shieldmaster_knight_upper.tres" id="9_iicqa"]
+[ext_resource type="Texture2D" uid="uid://b5wv600nibtc8" path="res://cards/card_parts/card_images/upper_card_base.png" id="10_pnl03"]
 [ext_resource type="Resource" uid="uid://njd16oip1ni7" path="res://cards/card_parts/lower_card_resources/bow_knight_lower.tres" id="16_pnl03"]
 [ext_resource type="Resource" uid="uid://cd4teaekfayld" path="res://cards/card_parts/lower_card_resources/shieldmaster_knight_lower.tres" id="17_i0ikc"]
 [ext_resource type="Resource" uid="uid://dmwj5053lx0v3" path="res://cards/card_parts/upper_card_resources/night_patrician_upper.tres" id="18_cev0m"]
 [ext_resource type="Resource" uid="uid://bywo2vm76jnnb" path="res://cards/card_parts/upper_card_resources/night_stalker_upper.tres" id="19_57pnn"]
+[ext_resource type="Texture2D" uid="uid://dho2pawq0baia" path="res://cards/card_parts/card_images/lower_card_base.png" id="19_c58el"]
 [ext_resource type="Resource" uid="uid://dyjgleddqr6as" path="res://cards/card_parts/upper_card_resources/swordmaster_knight_upper.tres" id="20_3sk73"]
 [ext_resource type="Resource" uid="uid://btx0rpapfinwc" path="res://cards/card_parts/lower_card_resources/night_patrician_lower.tres" id="36_3sk73"]
 [ext_resource type="Resource" uid="uid://c5jrws1pdfmka" path="res://cards/card_parts/lower_card_resources/night_stalker_lower.tres" id="37_dcfay"]
 [ext_resource type="Resource" uid="uid://ceavrnxn7qa4m" path="res://cards/card_parts/lower_card_resources/swordmaster_knight_lower.tres" id="39_dcfay"]
 
+[sub_resource type="Resource" id="Resource_d1lkm"]
+script = ExtResource("2_g4ohx")
+upper_part_name = "Warp"
+combined_card_supertype = "MAGIC"
+metadata/_custom_type_script = "uid://c1f08w6pxt3hf"
+
+[sub_resource type="Resource" id="Resource_s2k8g"]
+script = ExtResource("7_rjtrm")
+lower_card_name = " Flesh"
+lower_card_ability = "Warp Lower"
+lower_card_ability_script = "uid://du1qpu8oi7bq4"
+metadata/_custom_type_script = "uid://biq8vwcnh7tot"
+
+[sub_resource type="Resource" id="Resource_c58el"]
+script = ExtResource("7_rjtrm")
+lower_card_name = " Flesh Upper"
+lower_card_ability = "Warp Upper"
+lower_card_ability_script = "uid://cuuew4dfmsffi"
+metadata/_custom_type_script = "uid://biq8vwcnh7tot"
+
 [node name="CardDatabaseManager" type="Node" unique_id=414585039]
 script = ExtResource("1_twdnv")
-upper_card_parts = Array[ExtResource("2_g4ohx")]([ExtResource("3_67ou5"), ExtResource("4_egdmf"), ExtResource("18_cev0m"), ExtResource("19_57pnn"), ExtResource("20_3sk73"), ExtResource("8_iicqa"), ExtResource("9_iicqa")])
-lower_card_parts = Array[ExtResource("7_rjtrm")]([ExtResource("8_lm5u5"), ExtResource("9_ar4yc"), ExtResource("36_3sk73"), ExtResource("37_dcfay"), ExtResource("39_dcfay"), ExtResource("16_pnl03"), ExtResource("17_i0ikc")])
+upper_card_parts = Array[ExtResource("2_g4ohx")]([ExtResource("3_67ou5"), ExtResource("4_egdmf"), ExtResource("18_cev0m"), ExtResource("19_57pnn"), ExtResource("20_3sk73"), ExtResource("8_iicqa"), ExtResource("9_iicqa"), SubResource("Resource_d1lkm")])
+lower_card_parts = Array[ExtResource("7_rjtrm")]([ExtResource("8_lm5u5"), ExtResource("9_ar4yc"), ExtResource("36_3sk73"), ExtResource("37_dcfay"), ExtResource("39_dcfay"), ExtResource("16_pnl03"), ExtResource("17_i0ikc"), SubResource("Resource_s2k8g"), SubResource("Resource_c58el")])

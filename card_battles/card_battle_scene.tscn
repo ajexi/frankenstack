@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://eqqt3ry8xat7"]
 
 [ext_resource type="Script" uid="uid://gjhlq18a06na" path="res://card_battles/input_manager.gd" id="1_1sgh0"]
+[ext_resource type="Texture2D" uid="uid://cj05xqm5cba45" path="res://card_battles/duel_field/graveshadow.png" id="2_ftgky"]
 [ext_resource type="Script" uid="uid://bugrbn4qkg7lv" path="res://card_battles/card_manager.gd" id="2_lann1"]
 [ext_resource type="PackedScene" uid="uid://cenx6dnd8m2ws" path="res://card_battles/card_slot.tscn" id="3_3errm"]
 [ext_resource type="PackedScene" uid="uid://bh6bi4kinm30" path="res://card_battles/discard_pile.tscn" id="4_2kgs1"]
@@ -8,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cv8nvvy8ugf8l" path="res://card_battles/deck.tscn" id="5_ee454"]
 [ext_resource type="PackedScene" uid="uid://d2re5apyn5eri" path="res://card_battles/opponent_deck.tscn" id="6_3errm"]
 [ext_resource type="Script" uid="uid://18b7ns3vh5b" path="res://card_battles/battle_manager.gd" id="6_lann1"]
+[ext_resource type="Resource" uid="uid://b7x3dfjcn665e" path="res://card_battles/decks/test_deck.tres" id="7_uotce"]
 [ext_resource type="Script" uid="uid://boiwder46lj23" path="res://card_battles/opponent_hand.gd" id="8_53vph"]
 [ext_resource type="Script" uid="uid://ccqhdh2yllron" path="res://card_battles/opponent_deck.gd" id="8_ee454"]
+[ext_resource type="Texture2D" uid="uid://dk4jrjyvlc62v" path="res://card_battles/duel_field/player_deck_and_grave.png" id="12_4ueal"]
+[ext_resource type="Script" uid="uid://d268qe2afu0u5" path="res://card_battles/particle_effect_manager.gd" id="14_y46hw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kgs1"]
 bg_color = Color(1.92523e-06, 0.6386844, 0.9433952, 1)
@@ -18,6 +22,18 @@ bg_color = Color(1.92523e-06, 0.6386844, 0.9433952, 1)
 bg_color = Color(0.73333335, 0, 0.101960786, 1)
 
 [node name="CardBattleScene" type="Node2D" unique_id=232271465]
+
+[node name="FieldGraphics" type="Node2D" parent="." unique_id=602783859]
+
+[node name="Deck&Grave" type="Sprite2D" parent="FieldGraphics" unique_id=1139440278]
+z_index = -10
+position = Vector2(150, 687)
+texture = ExtResource("12_4ueal")
+
+[node name="GraveShadow" type="Sprite2D" parent="FieldGraphics" unique_id=5111653]
+z_index = 4
+position = Vector2(150, 687)
+texture = ExtResource("2_ftgky")
 
 [node name="InputManager" type="Node2D" parent="." unique_id=938403068]
 unique_name_in_owner = true
@@ -56,22 +72,22 @@ unique_name_in_owner = true
 
 [node name="CreatureCardSlot" parent="OpponentCardSlots" unique_id=892324734 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(722, 378)
+position = Vector2(722, 362)
 card_slot_type = "OPPONENT_CREATURE"
 
 [node name="CreatureCardSlot2" parent="OpponentCardSlots" unique_id=1585683509 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(976, 378)
+position = Vector2(976, 362)
 card_slot_type = "OPPONENT_CREATURE"
 
 [node name="CreatureCardSlot3" parent="OpponentCardSlots" unique_id=503864100 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(1229, 378)
+position = Vector2(1229, 362)
 card_slot_type = "OPPONENT_CREATURE"
 
 [node name="OpponentMagicCardSlot" parent="OpponentCardSlots" unique_id=1132819081 instance=ExtResource("3_3errm")]
 z_index = -1
-position = Vector2(1474, 301)
+position = Vector2(1474, 285)
 card_slot_type = "OPPONENT_MAGIC"
 
 [node name="PlayerDeck" parent="." unique_id=2116339862 instance=ExtResource("5_ee454")]
@@ -82,6 +98,7 @@ position = Vector2(150, 900)
 unique_name_in_owner = true
 position = Vector2(1773, 163)
 script = ExtResource("8_ee454")
+opponent_decklist = ExtResource("7_uotce")
 
 [node name="DiscardPile" parent="." unique_id=655734578 instance=ExtResource("4_2kgs1")]
 z_index = -1
@@ -109,6 +126,10 @@ _terrain_card_slot = NodePath("../PlayerCardSlots/TerrainCardSlot")
 
 [node name="BattleTimer" type="Timer" parent="BattleManager" unique_id=1434166064]
 one_shot = true
+
+[node name="ParticleEffectManager" type="Node" parent="." unique_id=802561436]
+unique_name_in_owner = true
+script = ExtResource("14_y46hw")
 
 [node name="UI Elements" type="Control" parent="." unique_id=298875762]
 layout_mode = 3

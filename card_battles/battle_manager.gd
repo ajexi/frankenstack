@@ -69,6 +69,8 @@ const ATTRIBUTE_BONUS_CHART : Dictionary = {
 
 const ATTRIBUTE_BONUS_VALUE : int = 300
 
+var damage_dealt_by_card_attack : int
+
 
 func _ready() -> void:
 	_end_turn_button.pressed.connect(_on_end_turn_button_pressed)
@@ -224,7 +226,7 @@ func opponent_play_creature_card(card : EnemyCard) -> void:
 	
 	#activate card ability, if there is one.
 	if card.lower_card_part.lower_card_ability_script != "" or null:
-		card.ability_script.trigger_ability(card_manager, self, card, 'Opponent')
+		card.ability_script.trigger_ability(card_manager, self, card, 'Opponent', 'on_played')
 	await wait(0.5)
 
 
@@ -248,9 +250,11 @@ func direct_attack(attacking_card : CombinedCard, attacker : String) -> void:
 	await wait(0.15)
 	
 	if attacker == "Opponent":
-		damage_player_life_points(attacking_card.upper_card_part.attack_points)
+		damage_player_life_points(attacking_card.current_attack_points)
+		trigger_effect_on_damage(attacking_card, attacker)
 	else:
-		damage_opponent_life_points(attacking_card.upper_card_part.attack_points)
+		damage_opponent_life_points(attacking_card.current_attack_points)
+		trigger_effect_on_damage(attacking_card, attacker)
 		
 	var tween2 = create_tween()
 	tween2.tween_property(attacking_card, "position", attacking_card.card_slot_card_is_in.position, CARD_MOVE_SPEED)
@@ -304,13 +308,17 @@ func attack(attacking_card : CombinedCard, defending_card : CombinedCard, attack
 	
 	#deal damage
 	var card_was_destroyed : bool = false
-	if attacking_card.upper_card_part.current_attack_points > stat_being_attacked:
+	if attacking_card.current_attack_points > stat_being_attacked:
 		var remainder_damage = attacking_card.current_attack_points - stat_being_attacked
 		if defending_card.is_in_defence_position == false:
 			if attacker == "Opponent":
 				damage_player_life_points(remainder_damage)
+				trigger_effect_on_damage(attacking_card, attacker)
+				
 			else:
 				damage_opponent_life_points(remainder_damage)
+				trigger_effect_on_damage(attacking_card, attacker)
+				
 		destroy_card(defending_card, defender)
 		card_was_destroyed = true
 	elif attacking_card.current_attack_points == stat_being_attacked:
@@ -349,14 +357,26 @@ func wait(wait_time : float) -> void:
 
 
 func damage_player_life_points(damage: int) -> void:
+	damage_dealt_by_card_attack = damage
 	player_life_points = max(0, player_life_points - damage)
 	_player_life_points_label.text = str(player_life_points)
 	
 	
 func damage_opponent_life_points(damage: int) -> void:
+	damage_dealt_by_card_attack = damage
 	opponent_life_points = max(0, opponent_life_points - damage)
 	_opponent_life_points_label.text = str(opponent_life_points)
+	
 
+func heal_player_life_points(healing: int) -> void:
+	player_life_points = max(0, player_life_points + healing)
+	_player_life_points_label.text = str(player_life_points)
+	
+
+func heal_opponent_life_points(healing: int) -> void:
+	opponent_life_points = max(0, opponent_life_points + healing)
+	_opponent_life_points_label.text = str(opponent_life_points)
+	
 
 func destroy_card(card : CombinedCard, card_owner: String) -> void:
 	var new_pos
@@ -386,6 +406,7 @@ func destroy_card(card : CombinedCard, card_owner: String) -> void:
 	
 	var tween = create_tween()
 	tween.tween_property(card, "position", new_pos, CARD_MOVE_SPEED)
+	card.z_index = 0
 
 
 func enemy_card_selected(defending_card : EnemyCard) -> void:
@@ -402,4 +423,9 @@ func enemy_card_selected(defending_card : EnemyCard) -> void:
 					player_action_points -= attacking_card.card_action_point_cost
 					_player_action_point_bar.value = player_action_points
 					attack(attacking_card, defending_card, "Player", "Opponent")
-		
+					
+
+func trigger_effect_on_damage(attacking_card, turn_player) -> void:
+	if attacking_card.lower_card_part.lower_card_ability_script != "" or null:
+		attacking_card.ability_script.trigger_ability(card_manager, self, attacking_card, 
+			turn_player, 'on_damage')

@@ -1,7 +1,10 @@
 extends CardAbility
 
 func trigger_ability(card_manager: CardManager, battle_manager: BattleManager, 
-	card : CombinedCard, turn_player: String) -> void:
+	card : CombinedCard, turn_player: String, effect_trigger : String) -> void:
+	
+	if effect_trigger != 'on_played':
+		return
 	
 	if card.card_supertype == 'CREATURE' and turn_player == 'Player':
 		await card_manager.position_selected

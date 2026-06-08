@@ -9,6 +9,10 @@ const DECK_SIZE_LIMIT : int = 30
 @onready var _card_builder_button: Button = %CardBuilderButton
 @onready var _go_to_battle_button: Button = %GoToBattleButton
 @onready var _add_random_30_button: Button = %AddRandom30Button
+@onready var _save_deck_button: Button = %SaveDeckButton
+@onready var _deck_name_line_edit: LineEdit = $DeckNameLineEdit
+
+@onready var deck_saver: DecklistSaver = %DeckSaver
 
 func _ready() -> void:
 	_reload_card_inventory()
@@ -27,6 +31,7 @@ func _ready() -> void:
 			var random_card = CardDatabaseManager.player_created_cards.pick_random()
 			add_card_to_deck(random_card[0], random_card[1])
 			)
+	_save_deck_button.pressed.connect(_save_decklist_to_tres_file)
 
 
 func _reload_card_inventory() -> void:
@@ -49,7 +54,6 @@ func _reload_card_inventory() -> void:
 		
 	_deck_amount_label.text = str(CardDatabaseManager.player_created_deck.size()) + '/30'
 	
-		
 
 func _reload_player_deck() -> void:
 	for card in _player_deck_container.get_children():
@@ -93,3 +97,21 @@ func remove_card_from_deck(upper_card_part, lower_card_part) -> void:
 	CardDatabaseManager.player_created_cards.append(card_to_remove)
 	_reload_card_inventory()
 	_reload_player_deck()
+
+
+func _save_decklist_to_tres_file() -> void:
+	var deck_name = _deck_name_line_edit.text
+	if deck_name == null or "":
+		return
+	
+	if ResourceLoader.exists(deck_saver.SAVE_PATH + deck_name + deck_saver.SAVE_EXTENSION):
+		deck_saver.saved_deck = ResourceLoader.load(deck_saver.SAVE_PATH + deck_name + deck_saver.SAVE_EXTENSION, "", 
+			ResourceLoader.CACHE_MODE_IGNORE)
+		deck_saver.saved_deck.deck_list.clear()
+	else:
+		deck_saver.saved_deck = SavedDeck.new()
+	
+	for card in CardDatabaseManager.player_created_deck:
+		deck_saver.saved_deck.deck_list.append(card)
+	deck_saver.save_deck(deck_name)
+	
